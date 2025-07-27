@@ -36,7 +36,8 @@ public class JpaStarterMain {
         employee3.setType(EmployeeType.FULL_TIME);
 
         //JPA will complain for Enumerator because it saves an enum type as INTEGER referring to the ordinals of the
-        //enum.
+        //enum. Not a good way to save enumerators in the database by default. Use @Enumerated(EnumType.STRING) annotation
+        //to save the enumerator as a string in the database.
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
         EntityManager entityManager = entityManagerFactory.createEntityManager();

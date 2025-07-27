@@ -13,7 +13,7 @@ public class Employee {
     @Id
     private int id;
 
-
+    @Enumerated(EnumType.STRING)
     private EmployeeType type;
 
     public EmployeeType getType() {
