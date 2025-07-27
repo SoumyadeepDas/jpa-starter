@@ -1,9 +1,8 @@
 package edu.jpa.soumyadeep;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
 
 /**
  * Employee class representing an entity with id and name.
@@ -21,6 +20,12 @@ public class Employee {
 
     @Column(name = "employee_ssn",unique = true,length = 20)
     private String ssn;
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    private LocalDate dateOfBirth;
 
     public String getSsn() {
         return ssn;
