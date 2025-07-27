@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
  * Employee class representing an entity with id and name.
  */
 @Entity
-@Table(name = "EMPLOYEE_DATA")
+@Table
 public class Employee {
     @Id
     private int id;
