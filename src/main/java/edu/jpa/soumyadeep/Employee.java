@@ -14,12 +14,12 @@ public class Employee {
     @Id
     private int id;
 
-    @Column(name = "employee_name")
+    @Column(name = "employee_name",length = 100)
     // This annotation specifies the column name in the database table.
     // If not specified, the default column name will be the same as the field name.
     private String name;
 
-    @Column(name = "employee_ssn",unique = true)
+    @Column(name = "employee_ssn",unique = true,length = 20)
     private String ssn;
 
     public String getSsn() {
