@@ -12,14 +12,18 @@ import jakarta.persistence.Persistence;
 public class JpaStarterMain {
     public static void main( String[] args ) {
         Employee employee1 = new Employee();
-        employee1.setId(1);
+        //employee1.setId(1); used @GeneratedValue annotation to generate the primary key value automatically.
+        // So, we don't need to set the id manually.
+        // If we set the id manually, it will not be auto-incremented in the database
         employee1.setName("Soumyadeep");
         employee1.setSsn("123-45-6789");
         employee1.setDateOfBirth(java.time.LocalDate.of(1990, 1, 1));
         employee1.setType(EmployeeType.FULL_TIME);
 
         Employee employee2 = new Employee();
-        employee2.setId(2);
+        //employee2.setId(2); used @GeneratedValue annotation to generate the primary key value automatically.
+        //        // So, we don't need to set the id manually.
+        //        // If we set the id manually, it will not be auto-incremented in the database
         employee2.setName("Moumita");
         //employee2.setSsn("123-45-6789"); // This will cause a unique constraint violation if the same SSN is used.
         // This is intentional to demonstrate the unique constraint feature of JPA (SQL). It's not JAVA complaining
@@ -29,8 +33,10 @@ public class JpaStarterMain {
 
 
         Employee employee3 = new Employee();
-        employee3.setId(3);
-        employee3.setName("Subhojit");
+       // employee3.setId(3);used @GeneratedValue annotation to generate the primary key value automatically.
+        //        // So, we don't need to set the id manually.
+        //        // If we set the id manually, it will not be auto-incremented in the database
+        employee3.setName("Anna");
         employee3.setSsn("111-22-3333");
         employee3.setDateOfBirth(java.time.LocalDate.of(2003, 1, 15));
         employee3.setType(EmployeeType.FULL_TIME);

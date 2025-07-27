@@ -10,7 +10,8 @@ import java.time.LocalDate;
 @Entity
 @Table
 public class Employee {
-    @Id
+    @Id   //Instead of @ID, to set the primary key of the entity by ourself, we can use @GeneratedValue annotation.
+    @GeneratedValue //This will generate the primary key value automatically as an auto-incremented value in the database.
     private int id;
 
     @Enumerated(EnumType.STRING)
@@ -46,25 +47,25 @@ public class Employee {
 
     private LocalDate dateOfBirth;
 
-    public String getSsn() {
-        return ssn;
-    }
+//    public String getSsn() {
+//        return ssn;
+//    }
 
     public void setSsn(String ssn) {
         this.ssn = ssn;
     }
 
-    public int getId() {
-        return id;
-    }
+//    public int getId() {
+//        return id;
+//    }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
+//    public String getName() {
+//        return name;
+//    }
 
     public void setName(String name) {
         this.name = name;
