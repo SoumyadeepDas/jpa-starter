@@ -13,6 +13,21 @@ public class Employee {
     @Id
     private int id;
 
+
+    private EmployeeType type;
+
+    public EmployeeType getType() {
+        return type;
+    }
+
+    public void setType(EmployeeType type) {
+        this.type = type;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
     @Column(name = "employee_name",length = 100)
     // This annotation specifies the column name in the database table.
     // If not specified, the default column name will be the same as the field name.
