@@ -39,6 +39,13 @@ public class JpaStarterMain {
         //enum. Not a good way to save enumerators in the database by default. Use @Enumerated(EnumType.STRING) annotation
         //to save the enumerator as a string in the database.
 
+        //If we think that the order of the enumerators will change in the future, we should use
+        //@Enumerated(EnumType.STRING) to save the enumerator as a string in the
+        //database. This way, the database will not be affected by the change in the order.
+        //However, if we are sure that the order of the enumerators will not change in the future,
+        //we can use @Enumerated(EnumType.ORDINAL) to save the enumerator as an integer in the database.
+        //This will save space in the database, but it will not be as flexible as saving the enumerator as a string.
+
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();

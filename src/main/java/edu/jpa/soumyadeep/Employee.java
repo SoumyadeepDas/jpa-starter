@@ -20,6 +20,10 @@ public class Employee {
         return type;
     }
 
+    //by default, JPA will save this. So mark it as transient if you don't want to save it in the database.
+    @Transient
+    private String debugInfo; //just for debugging purposes, not persisted in the database.
+
     public void setType(EmployeeType type) {
         this.type = type;
     }
