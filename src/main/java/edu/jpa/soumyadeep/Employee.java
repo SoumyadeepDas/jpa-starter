@@ -19,6 +19,17 @@ public class Employee {
     // If not specified, the default column name will be the same as the field name.
     private String name;
 
+    @Column(name = "employee_ssn",unique = true)
+    private String ssn;
+
+    public String getSsn() {
+        return ssn;
+    }
+
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
+    }
+
     public int getId() {
         return id;
     }

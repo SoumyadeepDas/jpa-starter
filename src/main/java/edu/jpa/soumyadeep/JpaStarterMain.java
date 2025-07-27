@@ -14,14 +14,19 @@ public class JpaStarterMain {
         Employee employee1 = new Employee();
         employee1.setId(1);
         employee1.setName("Soumyadeep");
+        employee1.setSsn("123-45-6789");
 
         Employee employee2 = new Employee();
         employee2.setId(2);
         employee2.setName("Moumita");
+        //employee2.setSsn("123-45-6789"); // This will cause a unique constraint violation if the same SSN is used.
+        // This is intentional to demonstrate the unique constraint feature of JPA (SQL). It's not JAVA complaining
+        employee2.setSsn("123-45-9876");
 
         Employee employee3 = new Employee();
         employee3.setId(3);
         employee3.setName("Subhojit");
+        employee3.setSsn("111-22-3333");
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
