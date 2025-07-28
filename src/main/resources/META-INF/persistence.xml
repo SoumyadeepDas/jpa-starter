@@ -21,7 +21,20 @@
 
             <!-- Hibernate Configuration -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+
+
+            <!-- <property name="hibernate.hbm2ddl.auto" value="validate"/> Validate is just to check the schema. It
+             is not going to change the database or write to it.-->
+            <!-- <property name="hibernate.hbm2ddl.auto" value="update"/> update will update the table to reflect
+            the changes, it will not drop any pre-existing table.-->
+            <!--<property name="hibernate.hbm2ddl.auto" value="create"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            'create' creates the schema at startup but does NOT delete it on shutdown
+            'create-drop' creates the schema at startup AND drops it when the application shuts down and we close the
+            entity and entity manager.-->
+            <!--<property name="hibernate.hbm2ddl.auto" value="none"/> does nothing-->
+
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
         </properties>
