@@ -11,6 +11,7 @@
         <!-- Replace the IP, port, and database name as per your H2 server setup -->
         <!--<class>your.package.YourEntityClass</class> Repeat for all your entities or use classpath scanning -->
         <class>edu.jpa.soumyadeep.Employee</class>
+        <class>edu.jpa.soumyadeep.AccessCard</class>
 
         <properties>
             <!-- JDBC Configuration -->

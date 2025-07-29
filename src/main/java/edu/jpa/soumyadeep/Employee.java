@@ -1,6 +1,7 @@
 package edu.jpa.soumyadeep;
 
 import jakarta.persistence.*;
+import org.hibernate.sql.results.graph.Fetch;
 
 import java.time.LocalDate;
 
@@ -11,8 +12,30 @@ import java.time.LocalDate;
 @Table
 public class Employee {
     @Id   //Instead of @ID, to set the primary key of the entity by ourself, we can use @GeneratedValue annotation.
-    @GeneratedValue //This will generate the primary key value automatically as an auto-incremented value in the database.
+    @GeneratedValue
+    //This will generate the primary key value automatically as an auto-incremented value in the database.
     private int id;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    //FetchType.LAZY means that the access card will not be loaded from the database until it is accessed. It will
+    // only be loaded when we call the getAccessCard() method.
+    private AccessCard accessCard;
+
+
+//    @OneToOne(fetch = FetchType.EAGER)
+//    //FetchType.EAGER means that the access card will be loaded from the database when the employee is loaded. We
+//    // don't need to call the getAccessCard() method to load the access card from the database.
+//    private AccessCard accessCard;
+
+
+    public void setAccessCard(AccessCard accessCard) {
+        this.accessCard = accessCard;
+    }
+
+    public AccessCard getAccessCard() {
+        return accessCard;
+    }
+
 
     @Enumerated(EnumType.STRING)
     private EmployeeType type;
@@ -33,12 +56,12 @@ public class Employee {
         return dateOfBirth;
     }
 
-    @Column(name = "employee_name",length = 100)
+    @Column(name = "employee_name", length = 100)
     // This annotation specifies the column name in the database table.
     // If not specified, the default column name will be the same as the field name.
     private String name;
 
-    @Column(name = "employee_ssn",unique = true,length = 20)
+    @Column(name = "employee_ssn", unique = true, length = 20)
     private String ssn;
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
@@ -75,6 +98,7 @@ public class Employee {
     public String toString() {
         return "Employee{" +
                 "id=" + id +
+                ", accessCard=" + accessCard +
                 ", type=" + type +
                 ", name='" + name + '\'' +
                 ", ssn='" + ssn + '\'' +
