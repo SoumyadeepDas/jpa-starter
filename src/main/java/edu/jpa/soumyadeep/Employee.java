@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.sql.results.graph.Fetch;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Employee class representing an entity with id and name.
@@ -16,7 +17,7 @@ public class Employee {
     //This will generate the primary key value automatically as an auto-incremented value in the database.
     private int id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     //FetchType.LAZY means that the access card will not be loaded from the database until it is accessed. It will
     // only be loaded when we call the getAccessCard() method.
     private AccessCard accessCard;
@@ -27,6 +28,20 @@ public class Employee {
 //    // don't need to call the getAccessCard() method to load the access card from the database.
 //    private AccessCard accessCard;
 
+
+    //the PayStub is the relation owner, so it has the foreign key column in the database.
+    //So, we can fetch the Employee entity from the PayStub entity using the foreign key
+    //column employee_id in the PayStub table.
+    @OneToMany(mappedBy = "employee")
+    private List<PayStub> payStubList;
+
+    public List<PayStub> getPayStubList() {
+        return payStubList;
+    }
+
+    public void setPayStubList(List<PayStub> payStubList) {
+        this.payStubList = payStubList;
+    }
 
     public void setAccessCard(AccessCard accessCard) {
         this.accessCard = accessCard;
