@@ -18,6 +18,11 @@ public class PayStub {
     // This means multiple pay stub records can belong to the same employee in the database.
     // The foreign key column (employee_id) will be created in the PayStub table.
     @ManyToOne
+    @JoinColumn(name = "paystub_employeeId")
+    // This annotation specifies the foreign key column in the PayStub table that references the Employee table.
+    // The name attribute specifies the name of the foreign key column in the PayStub table. @JoinColumn is used to
+    // define the foreign key column in the PayStub table that references the primary key of the
+    // Employee table. This establishes the relationship between the PayStub and Employee entities.
     private Employee employee;
 
     public Employee getEmployee() {

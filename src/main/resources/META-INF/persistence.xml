@@ -23,7 +23,7 @@
 
             <!-- Hibernate Configuration -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
 
 
             <!-- <property name="hibernate.hbm2ddl.auto" value="validate"/> Validate is just to check the schema. It

@@ -54,21 +54,40 @@ public class JpaStarterMainRelationalMappingDemo {
         payStub1.setPayPeriodEnd(java.time.LocalDate.of(2021, 2, 15));
         payStub1.setSalary(5000.00f);
         payStub1.setEmployee(employee1);
+        employee1.addPayStub(payStub1); // This line ensures that the payStub1 is added to the employee1's
+        // payStubList, thereby making the data consistent.
 
         PayStub payStub2 = new PayStub();
         payStub2.setPayPeriodStart(java.time.LocalDate.of(2022, 1, 3));
         payStub2.setPayPeriodEnd(java.time.LocalDate.of(2022, 2, 20));
         payStub2.setSalary(2000.00f);
         payStub2.setEmployee(employee1);
+        employee1.addPayStub(payStub2);
 
 
         employee1.setPayStubList(List.of(payStub1, payStub2));
+        // Why are we writing this line? Even if we don't write this line, JPA will still persist the PayStubs
+        // because we have a reversed relationship
+        // in the Employee class with the payStubs with @OneToMany annotation. So even if we don't set the
+        // payStubList in the Employee class, JPA will still persist the PayStubs.
+        //However, it is a good practice to set the relationship in both directions to maintain consistency and
+        // clarity in your code.
+        //This is because how JPA is designed. JPA doesn't always persist the object in the database immediately,
+        // however it does guanarantee the updated data always. If we don't set the paystubList in the Employee
+        // class, we might get up ending with null value in the payStubList field of the Employee class when we fetch
+        // the Employee object from the database later on. So it's a good practice to set the payStubList in the
+        // Employee class to avoid this issue.
 
+
+        //Instead of doing this, we can do this in a better way by introducing some utility methods in the Employee
+        // class for adding and removing PayStubs. This will help us to maintain the relationship in both directions.
 
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
+
+
         transaction.begin();
         entityManager.persist(employee1);
         entityManager.persist(employee2);

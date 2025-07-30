@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.sql.results.graph.Fetch;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,7 +34,11 @@ public class Employee {
     //So, we can fetch the Employee entity from the PayStub entity using the foreign key
     //column employee_id in the PayStub table.
     @OneToMany(mappedBy = "employee")
-    private List<PayStub> payStubList;
+    private List<PayStub> payStubList = new ArrayList<>();
+
+    public void addPayStub(PayStub payStub) {
+        this.payStubList.add(payStub);
+    }
 
     public List<PayStub> getPayStubList() {
         return payStubList;
