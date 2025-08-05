@@ -7,7 +7,7 @@ import jakarta.persistence.Persistence;
 
 import java.util.List;
 
-public class JpaStarterMainRelationalMappingDemo {
+public class JpaStarterMainWrite {
     public static void main(String[] args) {
 
         Employee employee1 = new Employee();
@@ -65,7 +65,9 @@ public class JpaStarterMainRelationalMappingDemo {
         employee1.addPayStub(payStub2);
 
 
+
         employee1.setPayStubList(List.of(payStub1, payStub2));
+
         // Why are we writing this line? Even if we don't write this line, JPA will still persist the PayStubs
         // because we have a reversed relationship
         // in the Employee class with the payStubs with @OneToMany annotation. So even if we don't set the
@@ -83,25 +85,46 @@ public class JpaStarterMainRelationalMappingDemo {
         // class for adding and removing PayStubs. This will help us to maintain the relationship in both directions.
 
 
+
+        EmailGroup emailGroup1 = new EmailGroup();
+        emailGroup1.setGroupName("Engineering Team");
+        emailGroup1.addEmployee(employee1);
+        emailGroup1.addEmployee(employee2);
+        employee1.addEmailSubscription(emailGroup1);
+        employee2.addEmailSubscription(emailGroup1);
+
+
+        EmailGroup emailGroup2 = new EmailGroup();
+        emailGroup2.setGroupName("Marketing Team");
+        employee1.addEmailSubscription(emailGroup2);
+        emailGroup2.addEmployee(employee1);
+
+
+
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
 
 
         transaction.begin();
-        entityManager.persist(employee1);
-        entityManager.persist(employee2);
 
         entityManager.persist(accessCard1);
         entityManager.persist(accessCard2);
 
+        entityManager.persist(employee1);
+        entityManager.persist(employee2);
+
+
         entityManager.persist(payStub1);
         entityManager.persist(payStub2);
+
+        entityManager.persist(emailGroup1);
+        entityManager.persist(emailGroup2);
 
         transaction.commit();
         entityManager.close();
         entityManagerFactory.close();
-        System.out.println("Employees and Access Cards saved successfully!");
+        System.out.println("Employees, Access Cards, PayStub and Email Group saved successfully!");
 
     }
 }

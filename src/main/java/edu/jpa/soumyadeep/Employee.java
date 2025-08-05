@@ -18,7 +18,7 @@ public class Employee {
     //This will generate the primary key value automatically as an auto-incremented value in the database.
     private int id;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     //FetchType.LAZY means that the access card will not be loaded from the database until it is accessed. It will
     // only be loaded when we call the getAccessCard() method.
     private AccessCard accessCard;
@@ -33,8 +33,22 @@ public class Employee {
     //the PayStub is the relation owner, so it has the foreign key column in the database.
     //So, we can fetch the Employee entity from the PayStub entity using the foreign key
     //column employee_id in the PayStub table.
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
     private List<PayStub> payStubList = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "email_group_subscription",
+    joinColumns = @JoinColumn(name = "employee_id"),
+    inverseJoinColumns = @JoinColumn(name = "email_group_id"))
+    private List<EmailGroup> emailGroups = new ArrayList<>();
+
+    public List<EmailGroup> getEmailGroups() {
+        return emailGroups;
+    }
+
+    public void setEmailGroups(List<EmailGroup> emailGroups) {
+        this.emailGroups = emailGroups;
+    }
 
     public void addPayStub(PayStub payStub) {
         this.payStubList.add(payStub);
@@ -65,8 +79,8 @@ public class Employee {
     }
 
     //by default, JPA will save this. So mark it as transient if you don't want to save it in the database.
-    @Transient
-    private String debugInfo; //just for debugging purposes, not persisted in the database.
+   // @Transient
+    //private String debugInfo; //just for debugging purposes, not persisted in the database.
 
     public void setType(EmployeeType type) {
         this.type = type;
@@ -124,5 +138,9 @@ public class Employee {
                 ", ssn='" + ssn + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 '}';
+    }
+
+    public void addEmailSubscription(EmailGroup emailGroup) {
+        this.emailGroups.add(emailGroup);
     }
 }

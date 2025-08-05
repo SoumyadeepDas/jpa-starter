@@ -8,10 +8,14 @@ public class JpaStarterRead {
     public static void main(String[] args) {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Employee employee1 = entityManager.find(Employee.class, 1);
-        Employee employee2 = entityManager.find(Employee.class, 2);
+//        Employee employee1 = entityManager.find(Employee.class, 1);
+//        Employee employee2 = entityManager.find(Employee.class, 2);
+//
+//        System.out.println(employee1.getPayStubList());
 
-        System.out.println(employee1.getPayStubList());
+        EmailGroup emailGroup1 = entityManager.find(EmailGroup.class, 1);
+        System.out.println("Got email group and now printing employees in the group:");
+        System.out.println(emailGroup1.getEmployees());
 
         //One to one is eager by default.
         //One to many is lazy by default. JPA will not fetch the related entities from the many side until we access
