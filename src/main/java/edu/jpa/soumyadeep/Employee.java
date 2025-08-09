@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table
+@NamedQuery(query = "SELECT e FROM Employee e order by e.name", name = "Employee.findAllInAsc")
 public class Employee {
     @Id   //Instead of @ID, to set the primary key of the entity by ourself, we can use @GeneratedValue annotation.
     @GeneratedValue
